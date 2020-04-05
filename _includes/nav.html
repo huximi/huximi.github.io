@@ -46,7 +46,7 @@
     var $navbar = document.querySelector('#huxblog_navbar');
     var $collapse = document.querySelector('.navbar-collapse');
 
-    var __HuxmimiNav__ = {
+    var __HuxmiNav__ = {
         close: function(){
             $navbar.className = " ";
             // wait until animation end.
@@ -61,16 +61,16 @@
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
-    }
+    };
 
     // Bind Event
     $toggle.addEventListener('click', function(e){
         if ($navbar.className.indexOf('in') > 0) {
-            __HuxmimiNav__.close()
+            __HuxmiNav__.close()
         }else{
-            __HuxmimiNav__.open()
+            __HuxmiNav__.open()
         }
-    })
+    });
 
     /**
      * Since Fastclick is used to delegate 'touchstart' globally
@@ -79,13 +79,13 @@
      * $toggle/$collapse will break global delegation.
      * 
      * Instead, we use a 'e.target' filter to prevent handler
-     * added to document close HuxmimiNav.
+     * added to document close HuxmiNav.
      *
      * Also, we use 'click' instead of 'touchstart' as compromise
      */
     document.addEventListener('click', function(e){
         if(e.target == $toggle) return;
         if(e.target.className == 'icon-bar') return;
-        __HuxmimiNav__.close();
+        __HuxmiNav__.close();
     })
 </script>
