@@ -71,7 +71,12 @@ public class SafeDoubleCheckedLocking{
         if(instance == null ){ // 第一次检查
             synchronized (SafeDoubleCheckedLocking.class){ // 加锁
                 if(instance == null){ // 第二次检查
-                    instance = new Instance();//该步骤有三小步：（1）分配对象的内存空间 （2）初始化对象 （3）设置instance指向刚分配的内存地址 volatile 就是防止（2）与（3）重排序
+                    //该步骤有三小步：
+                    // （1）分配对象的内存空间 
+                    // （2）初始化对象 
+                    // （3）设置instance指向刚分配的内存地址
+                    // volatile 就是防止（2）与（3）重排序
+                    instance = new Instance();
                 }
             }
         }
