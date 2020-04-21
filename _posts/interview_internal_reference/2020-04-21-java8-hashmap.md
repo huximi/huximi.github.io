@@ -368,7 +368,7 @@ public class HashMapInfiniteLoop {
         }.start();  
         new Thread("Thread2") {  
             public void run() {  
-                map.put(3, "A);  
+                map.put(3, "A");
                 System.out.println(map);  
             };  
         }.start();        
