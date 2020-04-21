@@ -9,6 +9,8 @@ tags:
   - Java
 ---
 
+##### 原文：https://zhuanlan.zhihu.com/p/21673805
+
 ### 摘要
 
 HashMap是Java程序员使用频率最高的用于映射（键值对）处理的数据类型。随着JDK(Java Development Kit)版本的更新，JDK1.8对HashMap底层的实现进行了优化，例如引入红黑树的数据结构和扩容的优化等。本文结合JDK1.7和JDK1.8的区别，深入探讨HashMap的结构实现和功能原理。
