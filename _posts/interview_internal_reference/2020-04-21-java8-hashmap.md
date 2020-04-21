@@ -9,7 +9,7 @@ tags:
   - Java
 ---
 
-##### 原文：[_https://zhuanlan.zhihu.com/p/21673805_](https://zhuanlan.zhihu.com/p/21673805)
+原文：[_https://zhuanlan.zhihu.com/p/21673805_](https://zhuanlan.zhihu.com/p/21673805)
 
 ### 摘要
 
@@ -140,7 +140,7 @@ static int indexFor(int h, int length) {  //jdk1.7的源码，jdk1.8没有这个
  - 5.遍历`table[i]`，判断链表长度是否大于8，大于8的话把链表转换为红黑树，在红黑树中执行插入操作，否则进行链表的插入操作；遍历过程中若发现`key`已经存在直接覆盖`value`即可；
  - 6.插入成功后，判断实际存在的键值对数量`size`是否超多了最大容量`threshold`，如果超过，进行扩容。 
  
- JDK1.8`HashMap`的`put`方法源码如下:
+ `JDK1.8` `HashMap`的`put`方法源码如下:
  
  ```
 public V put(K key, V value) {
