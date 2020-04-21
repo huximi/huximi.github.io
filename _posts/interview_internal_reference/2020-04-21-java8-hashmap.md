@@ -19,7 +19,7 @@ tags:
 
 `Java`为数据结构中的映射定义了一个接口`java.util.Map`,此接口主要有四个常用的实现类，分别是`HashMap`、`Hashtable`、`LinkedHashMap`、`TreeMap`，类继承关系如下图所示：
 
-![](../../img/java/map.png)
+![](/img/java/map.png)
 
 下面针对各个实现类的特点做一些说明：
 
@@ -40,7 +40,7 @@ tags:
 
 从结构实现来讲，`HashMap`是数组+链表+红黑树（`JDK1.8`增加了红黑树部分）实现的，如下所示：
 
-![](../../img/java/hashMap.png)
+![](/img/java/hashMap.png)
 
 这里需要讲明白两个问题：数据底层具体存储的是什么？这样的存储方式有什么优点呢？
 
@@ -125,13 +125,13 @@ static int indexFor(int h, int length) {  //jdk1.7的源码，jdk1.8没有这个
 
 下面举例说明下，`n`为`table`的长度。
 
-![](../../img/java/hashcode.png)
+![](/img/java/hashcode.png)
   
 #### 2.分析`HashMap`的`put`方法
 
 `HashMap`的`put`方法执行过程可以通过下图来理解，自己有兴趣可以去对比源码更清楚地研究学习。
 
-![](../../img/java/put.png)
+![](/img/java/put.png)
  
  - 1.判断键值对数组`table[i]`是否为空或为`null`，否则执行`resize()`进行扩容；
  - 2.根据键值`key`计算`hash`值得到插入的数组索引`i`，如果`table[i]==null`，直接新建节点添加，转向`6`，如果`table[i]`不为空，转向`3`；
@@ -251,19 +251,19 @@ void transfer(Entry[] newTable) {
 
 下面举个例子说明下扩容过程。假设了我们的`hash`算法就是简单的用`key` `mod` 一下表的大小（也就是数组的长度）。其中的哈希桶数组`table`的`size=2`， 所以`key = 3、7、5`，`put`顺序依次为 5、7、3。在`mod 2`以后都冲突在`table[1]`这里了。这里假设负载因子 `loadFactor=1`，即当键值对的实际大小`size` 大于 `table`的实际大小时进行扩容。接下来的三个步骤是哈希桶数组 `resize`成4，然后所有的`Node`重新`rehash`的过程。
 
-![](../../img/java/nexttable.png)
+![](/img/java/nexttable.png)
 
 下面我们讲解下`JDK1.8`做了哪些优化。经过观测可以发现，我们使用的是2次幂的扩展(指长度扩为原来2倍)，所以，元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置。看下图可以明白这句话的意思，n为`table`的长度，图（a）表示扩容前的`key1`和`key2`两种`key`确定索引位置的示例，图（b）表示扩容后`key1`和`key2`两种`key`确定索引位置的示例，其中`hash1`是`key1`对应的哈希与高位运算结果
 
-![](../../img/java/hash1.png)
+![](/img/java/hash1.png)
 
 元素在重新计算`hash`之后，因为n变为2倍，那么n-1的`mask`范围在高位多1bit(红色)，因此新的`index`就会发生这样的变化：
 
-![](../../img/java/hash2.png)
+![](/img/java/hash2.png)
 
 因此，我们在扩充`HashMap`的时候，不需要像`JDK1.7`的实现那样重新计算`hash`，只需要看看原来的`hash`值新增的那个`bit`是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+oldCap”，可以看看下图为16扩充为32的`resize`示意图：
 
-![](../../img/java/hash3.png)
+![](/img/java/hash3.png)
 
 这个设计确实非常的巧妙，既省去了重新计算`hash`值的时间，而且同时，由于新增的1bit是0还是1可以认为是随机的，因此`resize`的过程，均匀的把之前的冲突的节点分散到新的`bucket`了。这一块就是`JDK1.8`新增的优化点。有一点注意区别，`JDK1.7`中`rehash`的时候，旧链表迁移新链表的时候，如果在新表的数组索引位置相同，则链表元素会倒置，但是从上图可以看出，`JDK1.8`不会倒置。有兴趣的同学可以研究下`JDK1.8`的`resize`源码，写的很赞，如下:
 ```
@@ -384,17 +384,17 @@ public class HashMapInfiniteLoop {
 
 通过设置断点让线程1和线程2同时`debug`到`transfer`方法(3.3小节代码块)的首行。注意此时两个线程已经成功添加数据。放开`thread1`的断点至`transfer`方法的`Entry next = e.next;` 这一行；然后放开线程2的的断点，让线程2进行`resize`。结果如下图。
 
-![](../../img/java/resize1.png)
+![](/img/java/resize1.png)
 
 注意，`Thread1`的 `e` 指向了`key(3)`，而`next`指向了`key(7)`，其在线程二`rehash`后，指向了线程二重组后的链表。
 
 线程一被调度回来执行，先是执行 `newTalbe[i] = e`， 然后是`e = next`，导致了`e`指向了`key(7)`，而下一次循环的`next = e.next`导致了`next`指向了`key(3)`。
 
-![](../../img/java/resize2.png)
+![](/img/java/resize2.png)
 
 `e.next = newTable[i]` 导致 `key(3).next` 指向了 `key(7)`。注意：此时的`key(7).next` 已经指向了`key(3)`， 环形链表就这样出现了。
 
-![](../../img/java/resize3.png)
+![](/img/java/resize3.png)
 
 ### `JDK1.8`与`JDK1.7`的性能对比
 
@@ -484,7 +484,7 @@ public class Keys {
 
 在测试中会查找不同的值，然后度量花费的时间，为了计算`getKey`的平均时间，我们遍历所有的`get`方法，计算总的时间，除以`key`的数量，计算一个平均值，主要用来比较，绝对值可能会受很多环境因素的影响。结果如下：
 
-![](../../img/java/result.png)
+![](/img/java/result.png)
 
 通过观测测试结果可知，`JDK1.8`的性能要高于`JDK1.7` `15%`以上，在某些`size`的区域上，甚至高于`100%`。由于`Hash`算法较均匀，`JDK1.8`引入的红黑树效果不明显，下面我们看看`Hash`不均匀的的情况。
 
@@ -507,7 +507,7 @@ class Key implements Comparable<Key> {
 
 仍然执行`main`方法，得出的结果如下表所示：
 
-![](../../img/java/result2.png)
+![](/img/java/result2.png)
 
 从表中结果中可知，随着`size`的变大，`JDK1.7`的花费时间是增长的趋势，而`JDK1.8`是明显的降低趋势，并且呈现对数增长稳定。当一个链表太长的时候，`HashMap`会动态的将它替换成一个红黑树，这话的话会将时间复杂度从`O(n)`降为`O(logn)`。`hash`算法均匀和不均匀所花费的时间明显也不相同，这两种情况的相对比较，可以说明一个好的`hash`算法的重要性。
 
