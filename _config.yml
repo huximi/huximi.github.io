@@ -103,9 +103,9 @@ page-mathjax: false
 # Friends
 friends: [
     {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
-    # },{
+        title: "沈健的技术博客",
+        href: "https://shenjian.online/archives"
+     },{
         title: "黄玄的博客",
         href: "https://huangxuan.me"
     }
