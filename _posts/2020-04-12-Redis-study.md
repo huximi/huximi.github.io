@@ -5,7 +5,7 @@ subtitle: 'Redis 相关学习'
 author: "GuYang"
 header-img: "img/post-bg-2018.jpg"
 tags:    
-    - JAVA
+    - Java
     - Redis    
 ---
 

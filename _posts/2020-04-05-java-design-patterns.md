@@ -5,7 +5,7 @@ subtitle: 'Java 开发中的23种设计模式'
 author: "GuYang"
 header-img: "img/post-bg-2018.jpg"
 tags:    
-    - JAVA
+    - Java
     - 设计模式
     - Design Patterns
     - Factory
