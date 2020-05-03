@@ -67,7 +67,7 @@ https之所以安全，是因为他利用ssl/tls协议传输。
 
 首先我们明确：TCP标志位有6种标示，即：SYN（建立联机）、ACK（确认）、PSH（传送）、FIN（结束）、RST（重置）、URG（紧急）、Sequence number（顺序号码）、Acknowledge number（确认号码）
 
-<img src="https://shenjian.online/2020/03/16/Http%E8%AF%B7%E6%B1%82%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B/1.png">
+<img src="/img/http/1.png">
 
 #### 三次握手
 
@@ -79,7 +79,7 @@ https之所以安全，是因为他利用ssl/tls协议传输。
 
 3. 客户端在接收到服务器短的SYN+ACK包后，自己会向服务器发送ACK包，完成三次握手。那么客户端和服务器正式建立了连接，开始传输数据。
 
-   <img src="https://shenjian.online/2020/03/16/Http%E8%AF%B7%E6%B1%82%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B/2.png">
+   <img src="/img/http/2.png">
 
 #### 四次挥手
 
@@ -93,8 +93,8 @@ https之所以安全，是因为他利用ssl/tls协议传输。
 
 4. 当客户端收到FIN后，担心网络上某些不可控制的因素导致服务器不知道他要断开连接，会发送ACK进行确认，同时把自己设置成TIME_WAIT状态并启动定时器，在TCP的定时器到达后客户端并没有接收到请求，会重新发送；当服务器收到请求后就断开连接；当客户端等待2MLS（两倍报文最大生存时间）后，没有收到请求重传的请求后，客户端这边就断开连接，整个TCP通信就结束了。
 
-   <img src="https://shenjian.online/2020/03/16/Http%E8%AF%B7%E6%B1%82%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B/3.png">
-   <img src="https://shenjian.online/2020/03/16/Http%E8%AF%B7%E6%B1%82%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B/4.png">
+   <img src="/img/http/3.png">
+   <img src="/img/http/4.png">
 
 #### 三次握手为什么不能改成两次握手？
 
@@ -124,7 +124,7 @@ https之所以安全，是因为他利用ssl/tls协议传输。
 
 DNS(Domain Name System) 是“域名系统”的英文缩写，是一种组织成域层次结构的计算机和网络服务命名系统，它用于TCP/IP 网络，它从事将主机名或域名转换为实际IP地址的工作。DNS就是这样一位“翻译官”，它的基本工作原理可用下图来表示：
 
-<img src="https://shenjian.online/2020/03/16/Http%E8%AF%B7%E6%B1%82%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B/5.png">
+<img src="/img/http/5.png">
 
 1. 在浏览器中输入 `www.qq.com` 域名，操作系统会先检查自己本地的hosts文件是否有这个网址映射关系，如果有就先调用这个IP地址映射完成域名解析
 
@@ -138,9 +138,9 @@ DNS(Domain Name System) 是“域名系统”的英文缩写，是一种组织�
 
 6. 如果用的是转发模式，此DNS服务器就会把请求转发至上一级 DNS 服务器，由上一级服务器进行解析，上一级服务器如果不能解析，或找根 DNS 或把转请求转至上上级，以此循环。不管是本地 DNS 服务器用是是转发，还是根提示，最后都是把结果返回给本地 DNS 服务器，由此 DNS 服务器再返回给客户机。
 
-   <img src="https://shenjian.online/2020/03/16/Http%E8%AF%B7%E6%B1%82%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B/6.png">
+   <img src="/img/http/6.png">
 
-   <img src="https://shenjian.online/2020/03/16/Http%E8%AF%B7%E6%B1%82%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B/7.png">
+   <img src="/img/http/7.png">
 
 ### 7、通俗的表达整个流程让小白用户理解
 
