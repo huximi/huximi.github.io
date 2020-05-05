@@ -2,6 +2,15 @@
   "name": "HuXiMi Blog",
   "short_name": "HuXiMi Blog",
   "description": "Never give up the faith.",
+  "icons": [{
+    "src": "icons/128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  }, {
+    "src": "icons/300.png",
+    "sizes": "300x300",
+    "type": "image/png"
+  }],
   "version": "1.0",
   "background_color": "#fff",
   "theme_color": "#000",
