@@ -17,7 +17,7 @@ Boilerplate provide a clean version of this buzz blog.
 $ git clone git@github.com:huximi/huxblog-boilerplate.git
 ```
 
-**[View alive Boilerplate &rarr;](http://huximi.com/huxblog-boilerplate/)**
+**[View alive Boilerplate &rarr;](http://huangxuan.me/huxblog-boilerplate/)**
 
 
 Porting 
