@@ -114,5 +114,8 @@ friends: [
     },{
       title: "Logo通过DesignEvo设计制作",
       href: "https://www.designevo.com/cn/logo-maker/"
+    },{
+      title: "JavaGuide",
+      href: "https://github.com/Snailclimb/JavaGuide/"
     }
 ]
