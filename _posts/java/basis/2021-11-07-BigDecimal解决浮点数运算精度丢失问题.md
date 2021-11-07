@@ -1,3 +1,14 @@
+---
+layout: post
+title: "BigDecimal 学习"
+subtitle: 'BigDecimal 基础'
+author: "GuYang"
+header-img: "img/post-bg-2018.jpg"
+tags:    
+    - Java
+    - BigDecimal
+---
+
 ## BigDecimal 介绍
 
 `BigDecimal` 可以实现对浮点数的运算，不会造成精度丢失。
