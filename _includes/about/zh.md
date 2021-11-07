@@ -4,4 +4,4 @@ Hi，我是胡小米，本博客内容均来自互联网，本人收集只为学
 
 **如有侵权，请联系本人删除。**
 
-邮箱：[admin@huximi.com](mailto:admin@huximi.com)
+邮箱：[708812369@qq.com](mailto:708812369@qq.com)

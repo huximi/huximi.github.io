@@ -4,4 +4,4 @@ Hi, I ’m Hu Xiaomi. The content of this blog is all from the Internet. I colle
 
 **If there is any infringement, please contact me to delete.**
 
-Email: [admin@huximi.com](mailto:admin@huximi.com)
+Email: [708812369@qq.com](mailto:708812369@qq.com)
