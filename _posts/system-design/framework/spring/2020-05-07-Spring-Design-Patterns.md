@@ -1,4 +1,13 @@
-点击关注[公众号](#公众号)及时获取笔主最新更新文章，并可免费领取本文档配套的《Java面试突击》以及Java工程师必备学习资源。
+---
+layout: post
+title: "Spring中的设计模式"
+subtitle: 'Spring中的设计模式'
+author: "JavaGuide"
+header-style: text
+tags:
+  - Spring
+  - Design Patterns
+---
 
 <!-- TOC -->
 
