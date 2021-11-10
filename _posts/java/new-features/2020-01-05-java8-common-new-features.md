@@ -1,3 +1,14 @@
+---
+layout: post
+title: "Java8新特性"
+subtitle: 'Java8新特性'
+author: "JavaGuide"
+header-style: text
+tags:  
+    - Java  
+    - Java8      
+---
+
 # 我，一个10年老程序员，最近才开始用 Java 8 新特性
 
 > 本文来自[cowbi](https://github.com/cowbi)的投稿~
