@@ -129,7 +129,7 @@ public String readAllCookies(HttpServletRequest request) {
 
 关于这种认证方式更详细的过程如下：
 
-![](./images/basis-of-authority-certification/session-cookie.png)
+![](/img/authority/basis-of-authority-certification/session-cookie.png)
 
 1. 用户向服务器发送用户名、密码、验证码用于登陆系统。
 2. 服务器验证通过后，服务器为用户创建一个 `Session`，并将 `Session` 信息存储起来。
@@ -218,7 +218,7 @@ JWT 由 3 部分构成:
 
 在基于 Token 进行身份验证的的应用程序中，服务器通过`Payload`、`Header`和一个密钥(`secret`)创建令牌（`Token`）并将 `Token` 发送给客户端，客户端将 `Token` 保存在 Cookie 或者 localStorage 里面，以后客户端发出的所有请求都会携带这个令牌。你可以把它放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在 HTTP Header 的 Authorization 字段中：`Authorization: Bearer Token`。
 
-![jwt](./images/basis-of-authority-certification/jwt.png)
+![jwt](/img/authority/basis-of-authority-certification/jwt.png)
 
 1. 用户向服务器发送用户名和密码用于登陆系统。
 2. 身份验证服务响应并返回了签名的 JWT，上面包含了用户是谁的内容。
@@ -229,7 +229,7 @@ JWT 由 3 部分构成:
 
 SSO(Single Sign On)即单点登录说的是用户登陆多个子系统的其中一个就有权访问与其相关的其他系统。举个例子我们在登陆了京东金融之后，我们同时也成功登陆京东的京东超市、京东国际、京东生鲜等子系统。
 
-![sso](./images/basis-of-authority-certification/sso.png)
+![sso](/img/authority/basis-of-authority-certification/sso.png)
 
 ## 什么是 OAuth 2.0？
 
@@ -243,7 +243,7 @@ OAuth 2.0 比较常用的场景就是第三方登录，当你的网站接入了�
 
 微信支付账户相关参数：
 
-![](./images/basis-of-authority-certification/微信支付-fnglfdlgdfj.png)
+![](/img/authority/basis-of-authority-certification/微信支付-fnglfdlgdfj.png)
 
 下图是 [Slack OAuth 2.0 第三方登录](https://api.slack.com/legacy/oauth)的示意图：
 
