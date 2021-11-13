@@ -6,7 +6,7 @@ author: "GuYang"
 header-img: "img/post-bg-2018.jpg"
 tags:    
     - factory
-    - Design patterns    
+    - Design Patterns    
 ---
 
 ## 依赖注入容器（Dependency Injection Container）
