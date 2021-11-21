@@ -1,3 +1,14 @@
+---
+layout: post
+title: "Message-Queue"
+subtitle: '消息队列'
+author: "JavaGuide"
+header-style: text
+tags:    
+    - Message-Queue
+---
+
+
 # 消息队列其实很简单
 
 “RabbitMQ？”“Kafka？”“RocketMQ？”...在日常学习与开发过程中，我们常常听到消息队列这个关键词。我也在我的多篇文章中提到了这个概念。可能你是熟练使用消息队列的老手，又或者你是不懂消息队列的新手，不论你了不了解消息队列，本文都将带你搞懂消息队列的一些基本理论。如果你是老手，你可能从本文学到你之前不曾注意的一些关于消息队列的重要概念，如果你是新手，相信本文将是你打开消息队列大门的一板砖。
@@ -6,7 +17,7 @@
 
 我们可以把消息队列看作是一个存放消息的容器，当我们需要使用消息的时候，直接从容器中取出消息供自己使用即可。
 
-![Message queue](https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/message-queue-small.png)
+![Message queue](/img/distributed/message-queue-small.png)
 
 消息队列是分布式系统中重要的组件之一。使用消息队列主要是为了通过异步处理提高系统性能和削峰、降低系统耦合性。
 
@@ -26,7 +37,7 @@
 
 ### 2.1 通过异步处理提高系统性能（减少响应所需时间）
 
-![通过异步处理提高系统性能](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-11/Asynchronous-message-queue.png)
+![通过异步处理提高系统性能](/img/distributed/Asynchronous-message-queue.png)
 
 将用户的请求数据存储到消息队列之后就立即返回结果。随后，系统再对消息进行消费。
 
@@ -38,13 +49,13 @@
 
 举例：在电子商务一些秒杀、促销活动中，合理使用消息队列可以有效抵御促销活动刚开始大量订单涌入对系统的冲击。如下图所示：
 
-![削峰](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-11/削峰-消息队列.png)
+![削峰](/img/distributed/削峰-消息队列.png)
 
 ### 2.3 降低系统耦合性
 
 使用消息队列还可以降低系统耦合性。我们知道如果模块之间不存在直接调用，那么新增模块或者修改模块就对其他模块影响较小，这样系统的可扩展性无疑更好一些。还是直接上图吧：
 
-![解耦](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-11/消息队列-解耦.png)
+![解耦](/img/distributed/消息队列-解耦.png)
 
 生产者（客户端）发送消息到消息队列中去，接受者（服务端）处理消息，需要消费的系统直接去消息队列取消息进行消费即可而不需要和其他系统有耦合，这显然也提高了系统的扩展性。
 
