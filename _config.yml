@@ -102,20 +102,23 @@ page-mathjax: false
 
 # Friends
 friends: [
-    {
+      {
+        title: "JavaGuide",
+        href: "https://github.com/Snailclimb/JavaGuide/"
+      },{
+        title: "JavaGuide 在线阅读版",
+        href: "https://javaguide.cn/"
+      },{
         title: "沈健的技术博客",
         href: "https://shenjian.online/archives"
-     },{
+      },{
         title: "沈健的技术博客-FORK",
         href: "https://shenjian.huximi.com/archives"
-     },{
+      },{
         title: "黄玄的博客",
         href: "https://huangxuan.me"
-    },{
-      title: "Logo通过DesignEvo设计制作",
-      href: "https://www.designevo.com/cn/logo-maker/"
-    },{
-      title: "JavaGuide",
-      href: "https://github.com/Snailclimb/JavaGuide/"
-    }
+      },{
+        title: "Logo通过DesignEvo设计制作",
+        href: "https://www.designevo.com/cn/logo-maker/"
+      }
 ]
