@@ -222,5 +222,5 @@ class Broker {
 5. 滴滴出行基于RocketMQ构建企业级消息队列服务的实践：https://yq.aliyun.com/articles/664608
 6. 基于《RocketMQ技术内幕》源码注释：https://github.com/LiWenGu/awesome-rocketmq
 
-[1]: https://leran2deeplearnjavawebtech.oss-cn-beijing.aliyuncs.com/somephoto/RocketMQ%E6%B5%81%E7%A8%8B.png
+[1]: /img/distributed/RocketMQ%E6%B5%81%E7%A8%8B.png
 [2]: http://rocketmq.apache.org/release_notes/release-notes-4.5.0/
