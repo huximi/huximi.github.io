@@ -3,7 +3,7 @@ layout: post
 title: "Message-Queue"
 subtitle: '消息队列'
 author: "JavaGuide"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:    
     - Message-Queue
 ---

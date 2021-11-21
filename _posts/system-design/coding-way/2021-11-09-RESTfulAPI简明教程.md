@@ -3,7 +3,7 @@ layout: post
 title: "RESTful API"
 subtitle: 'RESTful API'
 author: "JavaGuide"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:
   - Java
 ---

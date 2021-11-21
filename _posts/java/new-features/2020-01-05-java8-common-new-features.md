@@ -3,7 +3,7 @@ layout: post
 title: "Java8新特性"
 subtitle: 'Java8新特性'
 author: "JavaGuide"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:  
     - Java  
     - Java8      

@@ -3,7 +3,7 @@ layout: post
 title: "Spring常见面试题"
 subtitle: 'Spring常见面试题'
 author: "Jian Shen"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:
   - Java
   - Spring

@@ -3,7 +3,7 @@ layout: post
 title: "红黑树详解"
 subtitle: '30张图带你彻底理解红黑树'
 author: "安卓大叔"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:
   - 红黑树
 ---

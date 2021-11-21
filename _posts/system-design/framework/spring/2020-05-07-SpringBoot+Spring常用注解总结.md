@@ -3,7 +3,7 @@ layout: post
 title: "Spring注解"
 subtitle: 'Spring注解详解'
 author: "JavaGuide"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:
   - Spring
   - annotations

@@ -3,7 +3,7 @@ layout: post
 title: "RocketMQ-Questions"
 subtitle: 'RocketMQ 消息中心'
 author: "JavaGuide"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:    
     - RocketMQ
 ---

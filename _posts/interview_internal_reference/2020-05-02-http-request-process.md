@@ -3,7 +3,7 @@ layout: post
 title: "Http详解"
 subtitle: 'Http请求完整流程'
 author: "Jian Shen"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:  
   - Http
   - TCP

@@ -3,7 +3,7 @@ layout: post
 title: "BIO,NIO,AIO 总结"
 subtitle: 'BIO,NIO,AIO 总结'
 author: "JavaGuide"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:    
     - Java    
 ---

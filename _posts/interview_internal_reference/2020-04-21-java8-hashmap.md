@@ -3,7 +3,7 @@ layout: post
 title: "Java 8系列之重新认识HashMap"
 subtitle: 'HashMap原理及分析'
 author: "Jian Shen"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:
   - HashMap
   - Java

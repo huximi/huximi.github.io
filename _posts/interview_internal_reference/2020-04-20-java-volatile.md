@@ -3,7 +3,7 @@ layout: post
 title: "Java并发机制底层实现原理之Volatile"
 subtitle: 'Java并发机制底层实现原理之Volatile'
 author: "Jian Shen"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:
   - volatile
   - Java

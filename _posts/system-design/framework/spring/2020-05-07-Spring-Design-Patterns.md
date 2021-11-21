@@ -3,7 +3,7 @@ layout: post
 title: "Spring中的设计模式"
 subtitle: 'Spring中的设计模式'
 author: "JavaGuide"
-header-style: text
+header-img: "img/post-bg-2018.jpg"
 tags:
   - Spring
   - Design Patterns
