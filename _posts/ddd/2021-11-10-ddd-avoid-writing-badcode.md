@@ -1,15 +1,16 @@
 ---
 layout: post
-title: "DDD-如何避免写流水账代"
-subtitle: 'DDD-如何避免写流水账代'
+title: "DDD-如何避免写流水账代码"
+subtitle: 'DDD-如何避免写流水账代码'
 author: "GuYang"
 header-img: "img/post-bg-2018.jpg"
 tags:    
+    - Java
     - DDD
     - Design Patterns    
 ---
 
-# DDD-如何避免写流水账代
+# DDD-如何避免写流水账代码
 
 ###  案例简介
 
