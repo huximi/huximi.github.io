@@ -15,7 +15,7 @@ tags:
 ###  案例简介
 
 这里举一个简单的常见案例：下单链路。假设我们在做一个checkout接口，需要做各种校验、查询商品信息、调用库存服务扣库存、然后生成订单：
-
+[](/img/ddd/下单流程.jpg)
  一个比较典型的代码如下： 
 
 ```java
@@ -229,7 +229,7 @@ public interface BabyCardService {
 这个的好处是符合了Single Responsibility Principle单一职责原则，也就是说一个接口类仅仅会因为一个（或一类）业务的变化而变化。一个建议是当一个现有的接口类过度膨胀时，可以考虑对接口类做拆分，拆分原则和SRP一致。
 
 也许会有人问，如果按照这种做法，会不会产生大量的接口类，导致代码逻辑重复？答案是不会，因为在DDD分层架构里，接口类的核心作用仅仅是协议层，每类业务的协议可以是不同的，而真实的业务逻辑会沉淀到应用层。也就是说Interface和Application的关系是多对多的
-
+[](/img/ddd/Interface-Application.jpg)
  因为业务需求是快速变化的，所以接口层也要跟着快速变化，通过独立的接口层可以避免业务间相互影响，但我们希望相对稳定的是Application层的逻辑。所以我们接下来看一下Application层的一些规范。 
 
 ### Application层 
@@ -418,6 +418,7 @@ public class UpdateOrderCommand {
  ApplicationService负责了业务流程的编排，是将原有业务流水账代码剥离了校验逻辑、领域计算、持久化等逻辑之后剩余的流程，是“胶水层”代码。 
 
  参考一个简易的交易流程： 
+ [](/img/ddd/下单流程2.png)
 
 在这个案例里可以看出来，交易这个领域一共有5个用例：下单、支付成功、支付失败关单、物流信息更新、关闭订单。这5个用例可以用5个Command/Event对象代替，也就是对应了5个方法。
 
@@ -655,6 +656,8 @@ public class CheckoutServiceImpl implements CheckoutService {
     }
 }
 ```
+结合之前的Data Mapper，DTO、Entity和DataObject之间的关系如下图：
+ [](/img/ddd/各层关系.png)
 
 #### Result vs Exception
 
@@ -682,6 +685,11 @@ ACL防腐层的简单原理如下：
 - 对于依赖的外部对象，我们抽取出所需要的字段，生成一个内部所需的VO或DTO类
 - 构建一个新的Facade，在Facade中封装调用链路，将外部类转化为内部类
 - 针对外部系统调用，同样的用Facade方法封装外部调用链路
+
+无防腐层的情况：
+ [](/img/ddd/无防腐层.png)
+有防腐层的情况：
+ [](/img/ddd/有防腐层.png)
 
  具体简单实现，假设所有外部依赖都命名为ExternalXXXService： 
 
