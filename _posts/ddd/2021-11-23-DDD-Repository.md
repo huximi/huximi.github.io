@@ -135,25 +135,25 @@ public void doSomeBusiness(Long id) {
 
 复杂的Entity拆分多张数据库表：常见的原因在于字段过多，导致查询性能降低，需要将非检索、大字段等单独存为一张表，提升基础信息表的检索效率。常见的案例如商品模型，将商品详细描述等大字段单独保存，提升查询性能：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnju9GpOruQRYGeb3wfBv2NUctCpN79icicVHVo302p7ico79K2mj0Z7TUZbibXic5JdNAfh7tXpCzlVLZOIA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/商品模型1.png)
 
 多个关联的Entity合并一张数据库表：这种情况通常出现在拥有复杂的Aggregate Root - Entity关系的情况下，且需要分库分表，为了避免多次查询和分库分表带来的不一致性，牺牲了单表的简洁性，提升查询和插入性能。常见的案例如主子订单模型：
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![图片](/img/ddd/订单模型1.png)
 
 从复杂Entity里抽取部分信息形成多个DTO：这种情况通常在Entity复杂，但是调用方只需要部分核心信息的情况下，通过一个小的DTO降低信息传输成本。同样拿商品模型举例，基础DTO可能出现在商品列表里，这个时候不需要复杂详情：
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![图片](/img/ddd/商品模型2.png)
 
 合并多个Entity为一个DTO：这种情况通常为了降低网络传输成本，降低服务端请求次数，将多个Entity、DP等对象合并序列化，并且让DTO可以嵌套其他DTO。同样常见的案例是在订单详情里需要展示商品信息：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnju9GpOruQRYGeb3wfBv2NUctljEcIdFoAkwaCUICqZ0gs8cQYSlhxWriaA5KVTqCth0w9iaSniao3Hsnw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/订单模型2.png)
 
 #### **▐ 模型所在模块和转化器**
 
 由于现在从一个对象变为3+个对象，对象间需要通过转化器（Converter/Mapper）来互相转化。而这三种对象在代码中所在的位置也不一样，简单总结如下：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnju9GpOruQRYGeb3wfBv2NUctsbKDEt4fphI2YZ1b7kFrF2FOeX8S44sY9ib0DLjZyn2KXArjb0G2p9Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/转换器1.png)
 
 DTO Assembler：在Application层，Entity到DTO的转化器有一个标准的名称叫DTO Assembler。Martin Fowler在P of EAA一书里对于DTO 和 Assembler的描述：Data Transfer Object。DTO Assembler的核心作用就是将1个或多个相关联的Entity转化为1个或多个DTO。
 
@@ -394,7 +394,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
 举一个常见的例子，在主子订单的场景下，一个主订单Order会包含多个子订单LineItem，假设有个改某个子订单价格的操作，会同时改变主订单价格，但是对其他子订单无影响：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnju9GpOruQRYGeb3wfBv2NUctDfgp2LOHyiaqqprZqQukkU9cj0U6JrTAbpYWcloQKPLqNhTm8gSFRIg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/订单模型3.png)
 
 如果用一个非常naive的实现来完成，会导致多出来两个无用的更新操作，如下：
 
