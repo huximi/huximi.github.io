@@ -256,7 +256,7 @@ SalesRep rep = salesRepRepo.findRep(areaCode);
 
 为了保证代码质量，每个方法里的每个入参的每个可能出现的条件都要有 TC 覆盖（假设我们先不去测试内部业务逻辑），所以在我们这个方法里需要以下的 TC ：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuicy3aSjJrwLfmhWnx7CPQuWqhs1PyItS1ia2gcRZRuKOZGDn17FsccIudG54rRKdsXVFmyCCZuMuVw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/TC.jpg)
 
 假如一个方法有 N 个参数，每个参数有 M 个校验逻辑，至少要有 N * M 个 TC  。
 
@@ -413,7 +413,7 @@ return userRepo.save(user);
 
 ##### ▍评估4 - 可测试性
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuicy3aSjJrwLfmhWnx7CPQuWM8oBYuQcK9iamdBVZNEtjfaZ6giaotoiawEp3eI9dxG5XusG8PoDLqYZw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/TC2.png)
 
 当我们将 `PhoneNumber `抽取出来之后，在来看测试的 TC ：
 
@@ -428,7 +428,7 @@ N + M + P
 
 ##### ▍评估总结
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuic1K85LOiaJNIXxvMYQcOQS0icF2WCIeDDPV9DETLCQQXmlmRXzIIy0XXuWZMbbCbMRrk7HTc5Vic5dw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/评估总结.png)
 
 #### 3、进阶使用
 
@@ -567,7 +567,7 @@ Domain Primitive 是 Value Object 的进阶版，在原始 VO 的基础上要求
 
 在日常开发中经常会碰到的另一个数据结构是 DTO ，比如方法的入参和出参。DP 和 DTO 的区别如下：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuic1K85LOiaJNIXxvMYQcOQS0uFyawEcAf8QuAQunQLuFVnyPibKpgfCg7yjLh6yZmlib7oO7Wz30PIuA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/DTO-DP.png)
 
 ##### ▍什么情况下应该用 Domain Primitive
 
