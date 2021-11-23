@@ -173,7 +173,7 @@ public class TransferServiceImpl implements TransferService {
 
 ### 2、重构方案
 
-在重构之前，我们先画一张流程图，描述当前代码在做的每个步骤：![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBFkVu8ZPpEoyO4rkkyk14j5hoypmEJAbJFdyvspIXqwXSqOqg1aAegA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+在重构之前，我们先画一张流程图，描述当前代码在做的每个步骤：![图片](/img/ddd/流程图1.jpg)
 
 这是一个传统的三层分层结构：UI层、业务层、和基础设施层。上层对于下层有直接的依赖关系，导致耦合度过高。在业务层中对于下层的基础设施有强依赖，耦合度高。我们需要对这张图上的每个节点做抽象和整理，来降低对外部依赖的耦合度。
 
@@ -275,7 +275,7 @@ DAO 和 Repository 类的对比如下：
 - Repository作为一个接口类，可以比较容易的实现Mock或Stub，可以很容易测试。
 - AccountRepositoryImpl实现类，由于其职责被单一出来，只需要关注Account到AccountDO的映射关系和Repository方法到DAO方法之间的映射关系，相对于来说更容易测试。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBpuxHhkIZL6rk13wodlPLmTDZUfKEsunLicKcBc4OOkibxwsPzsQmWRTQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/流程图2.jpg)
 
 #### **2.2 - 抽象第三方服务**
 
@@ -305,7 +305,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 
 这种常见的设计模式叫做Anti-Corruption Layer（防腐层或ACL）。很多时候我们的系统会去依赖其他的系统，而被依赖的系统可能包含不合理的数据结构、API、协议或技术实现，如果对外部系统强依赖，会导致我们的系统被”腐蚀“。这个时候，通过在系统间加入一个防腐层，能够有效的隔离外部依赖和内部逻辑，无论外部如何变更，内部代码可以尽可能的保持不变。
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![图片](/img/ddd/ACL1.jpg)
 
 ACL 不仅仅只是多了一层调用，在实际开发中ACL能够提供更多强大的功能：
 
@@ -315,7 +315,7 @@ ACL 不仅仅只是多了一层调用，在实际开发中ACL能够提供更多�
 - **易于测试**：类似于之前的Repository，ACL的接口类能够很容易的实现Mock或Stub，以便于单元测试。
 - **功能开关**：有些时候我们希望能在某些场景下开放或关闭某个接口的功能，或者让某个接口返回一个特定的值，我们可以在ACL配置功能开关来实现，而不会对真实业务代码造成影响。同时，使用功能开关也能让我们容易的实现Monkey测试，而不需要真正物理性的关闭外部依赖。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBuuCnoe4Pjem2dZK1xAUaAY7GTtQmwoMvRpszSlCjwJFzU5Lh4cdiciaA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/流程图3.jpg)
 
 #### **2.3 - 抽象中间件**
 
@@ -367,7 +367,7 @@ public class AuditMessageProducerImpl implements AuditMessageProducer {
 具体的分析和2.2类似，在此略过。
 
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBF3ztGp80CbpXREXVQL5aaDibZhcH1fVapbfe8gOqUrpsjTkxEkD4HLw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/流程图4.jpg)
 
 ####  **2.4 - 封装业务逻辑**
 
@@ -467,7 +467,7 @@ public class AccountTransferServiceImpl implements AccountTransferService {
 accountTransferService.transfer(sourceAccount, targetAccount, targetMoney, exchangeRate);
 ```
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![图片](/img/ddd/流程图5.jpg)
 
 #### 2.5 - 重构后结果分析
 
@@ -515,11 +515,11 @@ public class TransferServiceImplNew implements TransferService {
 
 我们可以根据新的结构重新画一张图：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBhPSjlpOsPrZcVq1yGPsicclvtj8NeLtOKFAibV7NXAZmndymO4RvXzlg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/重构1.jpg)
 
 然后通过重新编排后该图变为：
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![图片](/img/ddd/重构2.jpg)
 
 我们可以发现，通过对外部依赖的抽象和内部逻辑的封装重构，应用整体的依赖关系变了：
 
@@ -529,13 +529,11 @@ public class TransferServiceImplNew implements TransferService {
 
 如果今天能够重新写这段代码，考虑到最终的依赖关系，我们可能先写Domain层的业务逻辑，然后再写Application层的组件编排，最后才写每个外部依赖的具体实现。这种架构思路和代码组织结构就叫做Domain-Driven Design（领域驱动设计，或DDD）。所以DDD不是一个特殊的架构设计，而是所有Transction Script代码经过合理重构后一定会抵达的终点。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/7QRTvkK2qC5Hb36H9picjcSwarY1ibBR17ghmxPZpJyPRQlzFa4rnH402DPcaDZG28ZyjWuhMUBBDsHW5fmxdibbA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
-
 ### 3、DDD的六边形架构
 
 在我们传统的代码里，我们一般都很注重每个外部依赖的实现细节和规范，但是今天我们需要敢于抛弃掉原有的理念，重新审视代码结构。在上面重构的代码里，如果抛弃掉所有Repository、ACL、Producer等的具体实现细节，我们会发现每一个对外部的抽象类其实就是输入或输出，类似于计算机系统中的I/O节点。这个观点在CQRS架构中也同样适用，将所有接口分为Command（输入）和Query（输出）两种。除了I/O之外其他的内部逻辑，就是应用业务的核心逻辑。基于这个基础，Alistair Cockburn在2005年提出了Hexagonal Architecture（六边形架构），又被称之为Ports and Adapters（端口和适配器架构）。
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEByicSE36LFhq0BTRh7MI8oVx7MyzYu92P5brVXmRDfpo18nkMA4qrftg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/六边形1.png)
 
 在这张图中：
 
@@ -548,49 +546,45 @@ public class TransferServiceImplNew implements TransferService {
 
 除了2005年的Hex架构，2008年 Jeffery Palermo的Onion Architecture（洋葱架构）和2017年 Robert Martin的Clean Architecture（干净架构），都是极为类似的思想。除了命名不一样、切入点不一样之外，其他的整体架构都是基于一个二维的内外关系。这也说明了基于DDD的架构最终的形态都是类似的。Herberto Graca有一个很全面的图包含了绝大部分现实中的端口类，值得借鉴。
 
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![图片](/img/ddd/六边形2.jpg)
 
 #### 3.1 - 代码组织结构
 
 为了有效的组织代码结构，避免下层代码依赖到上层实现的情况，在Java中我们可以通过POM Module和POM依赖来处理相互的关系。通过Spring/SpringBoot的容器来解决运行时动态注入具体实现的依赖的问题。一个简单的依赖关系图如下：
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBibOHsJFhYOz8wdLkoLpWEP1SZicx8KVJPj0Oq59RI5Yd1M0tCMTBn96g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/组织结构1.jpg)
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBNfJR6ibV1m3J4Xdtvd0VFZ6nOytMkmuuGicOAme3bTc1S3ACMt2thUDw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/组织结构2.png)
 
 ##### 3.1.1 - Types 模块
 
 Types模块是保存可以对外暴露的Domain Primitives的地方。Domain Primitives因为是无状态的逻辑，可以对外暴露，所以经常被包含在对外的API接口中，需要单独成为模块。Types模块不依赖任何类库，纯 POJO 。
 
-[图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+[图片](/img/ddd/组织结构3.png)
 
 ##### 3.1.2 - Domain 模块
 
 Domain 模块是核心业务逻辑的集中地，包含有状态的Entity、领域服务Domain Service、以及各种外部依赖的接口类（如Repository、ACL、中间件等。Domain模块仅依赖Types模块，也是纯 POJO 。
 
-
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBw6h6u8RNXzNE3cOVYF7cambLLlIb5ibfcLj9JLynsZL1fPAzsfcdTsA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/组织结构4.jpg)
 
 ##### 3.1.3 - Application模块
 
 Application模块主要包含Application Service和一些相关的类。Application模块依赖Domain模块。还是不依赖任何框架，纯POJO。
 
-
-![图片](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
+![图片](/img/ddd/组织结构5.png)
 
 ##### 3.1.4 - Infrastructure模块
 
 Infrastructure模块包含了Persistence、Messaging、External等模块。比如：Persistence模块包含数据库DAO的实现，包含Data Object、ORM Mapper、Entity到DO的转化类等。Persistence模块要依赖具体的ORM类库，比如MyBatis。如果需要用Spring-Mybatis提供的注解方案，则需要依赖Spring。
 
-
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBicft40OXaibnibT86aj2s11aok4NXVfmcrVI79sVKs5JLtrxa1Dnia06IA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/组织结构6.png)
 
 ##### 3.1.5 - Web模块
 
 Web模块包含Controller等相关代码。如果用SpringMVC则需要依赖Spring。
 
-
-![图片](https://mmbiz.qpic.cn/mmbiz_png/33P2FdAnjuibCA7zuzhlSIpEHAClQ3dEBCcCumAibDlffTuRD1UiaPyOYaM3VueCDT09UX5ZmYSgQEZayH5Kkb13g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](/img/ddd/组织结构7.png)
 
 ##### 3.1.6 - Start模块
 
@@ -613,8 +607,6 @@ Start模块是SpringBoot的启动类。
 - Infrastructure层属于最低频变更的。一般这个层的模块只有在外部依赖变更了之后才会跟着升级，而外部依赖的变更频率一般远低于业务逻辑的变更频率。
 
 所以在DDD架构中，能明显看出越外层的代码越稳定，越内层的代码演进越快，真正体现了领域“驱动”的核心思想。
-
-![图片](https://mmbiz.qpic.cn/mmbiz_png/7QRTvkK2qC5Hb36H9picjcSwarY1ibBR17ghmxPZpJyPRQlzFa4rnH402DPcaDZG28ZyjWuhMUBBDsHW5fmxdibbA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 
 ### 4、总结
 
