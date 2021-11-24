@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "DDD-如何避免写流水账代码"
-subtitle: 'DDD-如何避免写流水账代码'
+title: "详解 DDD 系列 - 如何避免写流水账代码"
+subtitle: '详解 DDD 系列 - 如何避免写流水账代码'
 author: "GuYang"
 header-img: "img/post-bg-2018.jpg"
 tags:    
