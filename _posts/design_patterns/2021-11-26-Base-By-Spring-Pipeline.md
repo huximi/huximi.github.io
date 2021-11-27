@@ -280,31 +280,15 @@ public @interface Pipeline {
 }
 ```
 
-管道公共接口：
-
-```java
-/**
- * 〈管道公共接口，所有使用管道模式的服务或组件要实现此接口，并增加注解@Pipeline 〉 <br>
- * Spring 在启动时，会遍历所有实现 PipelineHandler 接口的类，然后找到注解 Pipeline，解析其上下文和处理器列表；<br>
- *
- * @see Pipeline
- * @see PipelineRouteConfig
- * @since [产品/模块版本] （可选）
- */
-public interface PipelineHandler {
-}
-```
-
 基于 Spring 的 Java Bean 配置，我们可以很方便的构建管道的路由表： 
 
 ```java
 /**
  * 〈管道路由的配置〉
- *  1、配置各种上下文类型对应的处理管道：键为上下文类型，值为处理器类型的列表 <br>
- *  2、根据上下文类型获取对应的处理器列表；<br>
+ * 1、配置各种上下文类型对应的处理管道：键为上下文类型，值为处理器类型的列表 <br>
+ * 2、根据上下文类型获取对应的处理器列表；<br>
  *
  * @see Pipeline
- * @see PipelineHandler
  * @see PipelineExecutor
  * @since [产品/模块版本] （可选）
  */
@@ -312,32 +296,49 @@ public interface PipelineHandler {
 public class PipelineRouteConfig implements ApplicationContextAware {
 
     /**
+     * Spring容器
+     */
+    private ApplicationContext appContext;
+
+    /**
      * 数据类型->管道中处理器类型列表 的路由
      * 配置各种上下文类型对应的处理管道：键为上下文类型，值为处理器类型的列表
      */
     private static final Map<Class<? extends PipelineContext>,
-            List<Class<? extends ContextHandler<? extends PipelineContext>>>> PIPELINE_ROUTE_MAP = new HashMap<>(4);
+            List<Class<? extends ContextHandler<? extends PipelineContext>>>> PIPELINE_ROUTE_MAP =
+            new ConcurrentHashMap<>();
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        appContext = applicationContext;
+        // 注入管道服务
+        this.registerPipelinePolicies(applicationContext);
+    }
 
     /**
-     * 注入管道
+     * 注入管道服务
      *
-     * @param handlers
+     * @param applicationContext 容器
      */
-    @Autowired
-    private void registerSaveCmPolicies(List<PipelineHandler> handlers) throws ComException {
-        if (CollectionUtils.isEmpty(handlers)) {
+    private void registerPipelinePolicies(ApplicationContext applicationContext) {
+        Map<String, Object> pipelineMap = applicationContext.getBeansWithAnnotation(Pipeline.class);
+        if (MapUtils.isEmpty(pipelineMap)) {
             return;
         }
-        for (PipelineHandler handler : handlers) {
-            // 业务类型
-            Pipeline pipeline = AnnotationUtils.findAnnotation(handler.getClass(), Pipeline.class);
+        for (Object serviceBean : pipelineMap.values()) {
+            Pipeline pipeline = AnnotationUtils.findAnnotation(serviceBean.getClass(), Pipeline.class);
             if (null != pipeline && pipeline.handles().length > 0) {
                 PIPELINE_ROUTE_MAP.put(pipeline.pipContext(), Arrays.asList(pipeline.handles()));
             }
         }
     }
 
-    public List<? extends ContextHandler<? super PipelineContext>> getHandlerPipelineMap(
+    /**
+     * 获取上下文类型对应的处理器列表
+     * @param dataType 上下文类型
+     * @return 处理器列表
+     */
+    public List<? extends ContextHandler<? super PipelineContext>> listPipelineHandler(
             Class<? extends PipelineContext> dataType) {
         return this.toPipeline(PIPELINE_ROUTE_MAP.get(dataType));
     }
@@ -347,17 +348,13 @@ public class PipelineRouteConfig implements ApplicationContextAware {
      */
     private <T> List<T> toPipeline(List<Class<? extends ContextHandler<? extends PipelineContext>>> classList) {
         List<T> handlerList = new LinkedList<>();
+        if (CollectionUtils.isEmpty(classList)) {
+            return handlerList;
+        }
         for (Class<? extends ContextHandler<? extends PipelineContext>> aClass : classList) {
             handlerList.add((T) appContext.getBean(aClass));
         }
         return handlerList;
-    }
-
-    private ApplicationContext appContext;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        appContext = applicationContext;
     }
 }
 ```
@@ -392,9 +389,9 @@ public class PipelineExecutor {
         // 拿到数据类型
         Class<? extends PipelineContext> dataType = context.getClass();
         // 获取数据处理管道
-        List<? extends ContextHandler<? super PipelineContext>> pipeline = pipelineRouteConfig.getHandlerPipelineMap(dataType);
+        List<? extends ContextHandler<? super PipelineContext>> pipelineHandlerList = pipelineRouteConfig.listPipelineHandler(dataType);
 
-        if (CollectionUtils.isEmpty(pipeline)) {
+        if (CollectionUtils.isEmpty(pipelineHandlerList)) {
             log.error("{} 的管道为空", dataType.getSimpleName());
             return false;
         }
@@ -402,7 +399,7 @@ public class PipelineExecutor {
         // 管道是否畅通
         boolean lastSuccess = true;
 
-        for (ContextHandler<? super PipelineContext> handler : pipeline) {
+        for (ContextHandler<? super PipelineContext> handler : pipelineHandlerList) {
             try {
                 // 当前处理器满足指定规则时，处理数据，如抛出异常，则不再向下处理
                 if (handler.isSatisfied(context)) {
@@ -440,7 +437,7 @@ public class PipelineExecutor {
                 ModelInstanceCreator.class,
                 ModelInstanceSaver.class
         })
-public class ModelServiceImpl implements ModelService, PipelineHandler {
+public class ModelServiceImpl implements ModelService {
     
     @Autowired
     private PipelineExecutor pipelineExecutor;
@@ -535,7 +532,7 @@ public class BizSideCustomProcessor implements ContextHandler<InstanceBuildConte
                 ModelInstanceCreator.class,
                 ModelInstanceSaver.class
         })
-public class ModelServiceImpl implements ModelService, PipelineHandler {
+public class ModelServiceImpl implements ModelService {
     
     @Autowired
     private PipelineExecutor pipelineExecutor;
