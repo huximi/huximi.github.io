@@ -672,7 +672,7 @@ public class PipelineExecutor {
         // 管道是否畅通
         boolean lastSuccess = true;
 
-        for (ContextHandler<? super PipelineContext> handler : pipeline) {
+        for (ContextHandler<? super PipelineContext> handler : pipelineHandlerList) {
             try {
                 // 当前处理器满足指定规则时，处理数据，如抛出异常，则不再向下处理
                 if (handler.isSatisfied(context)) {
