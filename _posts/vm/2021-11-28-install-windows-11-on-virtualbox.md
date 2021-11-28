@@ -5,8 +5,8 @@ subtitle:   如何在 VirtualBox 6.1 上安装 Microsoft Windows 11
 author:     GuYang
 header-img: "img/post-bg-2018.jpg"
 tags:
-    - VirtualBox
-    - Windows11
+    - VirtualBox 6.1
+    - Windows 11
 ---
 
 # 如何在 VirtualBox 6.1 上安装 Microsoft Windows 11！
@@ -27,8 +27,6 @@ tags:
   - EFI（仅限特殊操作系统）已启用
 
 ![系统 - 主板](https://blogs.oracle.com/content/published/api/v1.1/assets/CONT23F3D30F8AD640EB81CE89968AEB9BF2/Medium?cb=_cache_7a6f&format=jpg&channelToken=bdc0a0a82e064a5093403b37226ecf1e)
-
- 
 
 - 系统 - 处理器
   - CPU：2（最低）
@@ -68,3 +66,7 @@ tags:
 ![Windows 11 - 安装过程](https://blogs.oracle.com/content/published/api/v1.1/assets/CONTDEA424E3678D43609F6A3E30627422E1/Medium?cb=_cache_7a6f&format=jpg&channelToken=bdc0a0a82e064a5093403b37226ecf1e)
 
 我将保持这篇文章的更新，以防同样不适用于更新的版本或 Microsoft Windows 11 的 GA 版本，显然，我愿意对此发表评论，因此请随时联系[推特在这里](https://twitter.com/scoter80)！
+
+安装完成：
+
+![Windows 11 - 安装完成](/img/vm/windows11-installed.png)
