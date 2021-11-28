@@ -11,7 +11,7 @@ tags:
 
 # 如何在 VirtualBox 6.1 上安装 Microsoft Windows 11！
 
-> 原文 ：https://blogs.oracle.com/virtualization/post/install-microsoft-windows-11-on-virtualbox
+> 原文 ：[如何在 VirtualBox 6.1 上安装 Microsoft Windows 11](https://blogs.oracle.com/virtualization/post/install-microsoft-windows-11-on-virtualbox)
 >
 
 ![img](https://blogs.oracle.com/content/published/api/v1.1/assets/CONT47A30F8C7A9045A1B868871EA6093DE7/Thumbnail?cb=_cache_7a6f&format=jpg&channelToken=bdc0a0a82e064a5093403b37226ecf1e)[西蒙·科特](https://blogs.oracle.com/virtualization/authors/Blog-Author/CORE663DB8EA17ED4B669937CC6C0E87F10D/simon-coter)| 2021 年 9 月 29 日Oracle Linux 和虚拟化产品管理总监
