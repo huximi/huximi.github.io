@@ -70,3 +70,12 @@ tags:
 安装完成：
 
 ![Windows 11 - 安装完成](/img/vm/windows11-installed.png)
+
+Windows 11 激活：
+复制以下文本，另存为.bat文件，并右键选择【管理员身份运行】。
+```
+slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
+slmgr /skms kms.03k.org
+slmgr /ato
+```
+![Windows 11 - 激活完成](/img/vm/windows11-slmgr.png)
