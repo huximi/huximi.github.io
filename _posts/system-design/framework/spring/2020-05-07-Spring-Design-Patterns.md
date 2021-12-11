@@ -52,16 +52,35 @@ Design Patterns(设计模式) 表示面向对象软件开发中最好的计算�
 **DI(Dependecy Inject,依赖注入)是实现控制反转的一种设计模式，依赖注入就是将实例变量传入到一个对象中去。**
 含义：把底层类作为参数传递给上层类，实现上层对下层的“控制”。
 方式：
- 1.Setter
- 2.Interface
- 3.Constructor
- 4.Annotation
+ 1. Setter
+ 2. Interface
+ 3. Constructor
+ 4. Annotation
 
 ### 依赖倒置原则
 高层模块不应该依赖低层模块，两者应该依赖其抽象。
 
 依赖倒置原则、IOC、DI、IOC容器的关系
  ![DIP-IOC](/img/spring/DIP-IOC-DI.jpg)
+
+### Spring IOC 支持的功能
+ 1. 依赖注入
+ 2. 依赖检查
+ 3. 自动装配
+ 4. 支持集合
+ 5. 指定初始化方法和销毁方法
+ 6. 支持回调方法
+ 
+### Spring IOC容器的核心接口
+ 1. BeanFactory
+ 2. ApplicationContext
+ 
+#### BeanDefinition 
+ 主要用来描述Bean的定义
+   
+#### BeanDefinitionRegistry
+
+ 
 
 ## 工厂设计模式
 
