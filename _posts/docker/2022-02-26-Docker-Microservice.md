@@ -301,7 +301,7 @@ $ docker container stop wordpress
 ```
  $ docker container run \
   -d \
-  -p 127.0.0.2:8080:80 \
+  -p 8080:80 \
   --rm \
   --name wordpress \
   --env WORDPRESS_DB_PASSWORD=123456 \
@@ -312,10 +312,10 @@ $ docker container stop wordpress
 
 上面的命令跟前面相比，命令行参数只多出了两个。
 
- - -p 127.0.0.2:8080:80：将容器的 80 端口映射到127.0.0.2的8080端口。
+ - -p 8080:80：将容器的 80 端口映射到8080端口。
  - --volume "$PWD/wordpress":/var/www/html：将容器的/var/www/html目录映射到当前目录的wordpress子目录。
 
-浏览器访问127.0.0.2:8080:80就能看到 WordPress 的安装提示了。而且，你在wordpress子目录下的每次修改，都会反映到容器里面。
+浏览器访问127.0.0.1:8080就能看到 WordPress 的安装提示了。而且，你在wordpress子目录下的每次修改，都会反映到容器里面。
 
 最后，终止这两个容器（容器文件会自动删除）。
 
@@ -355,25 +355,34 @@ $ docker-compose --version
 在docker-demo目录下，新建docker-compose.yml文件，写入下面的内容。
 
 ```
-mysql:
-    image: mysql:5.7
-    environment:
-     - MYSQL_ROOT_PASSWORD=123456
-     - MYSQL_DATABASE=wordpress
-web:
+version: '3.1'
+services:
+  wordpress:
     image: wordpress
-    links:
-     - mysql
-    environment:
-     - WORDPRESS_DB_PASSWORD=123456
+    restart: always
     ports:
-     - "127.0.0.3:8080:80"
-    working_dir: /var/www/html
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: wordpressdb
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
     volumes:
-     - wordpress:/var/www/html
+      - wordpress:/var/www/html
+  wordpressdb:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'    
+volumes:
+  wordpress:
+  wordpressdb:     
 ```
 
-上面代码中，两个顶层标签表示有两个容器mysql和web。每个容器的具体设置，前面都已经讲解过了，还是挺容易理解的。
+上面代码中，两个顶层标签表示有两个容器wordpressdb和wordpress。每个容器的具体设置，前面都已经讲解过了，还是挺容易理解的。
 
 启动两个容器。
 
@@ -381,7 +390,7 @@ web:
 $ docker-compose up
 ```
 
-浏览器访问 http://127.0.0.3:8080，应该就能看到 WordPress 的安装界面。
+浏览器访问 http://localhost:8080，应该就能看到 WordPress 的安装界面。
 
 现在关闭两个容器。
 
