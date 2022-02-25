@@ -390,6 +390,12 @@ volumes:
 $ docker-compose up
 ```
 
+容器还能够以后台的方式运行
+
+```
+$ docker-compose up -d
+```
+
 浏览器访问 http://localhost:8080/wp-admin/install.php，应该就能看到 WordPress 的安装界面。
 
 现在关闭两个容器。
