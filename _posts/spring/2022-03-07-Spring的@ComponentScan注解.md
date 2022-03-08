@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      Spring的@ComponentScan注解
-subtitle:   @ComponentScan注解
+title:      Spring的ComponentScan注解
+subtitle:   ComponentScan注解
 date:       2022-03-07
 author:     guyang
 header-img: "img/post-bg-2018.jpg"
@@ -9,7 +9,7 @@ tags:
     - Spring  
 ---
 
-#  @ComponentScan注解
+#  `@ComponentScan`注解
 
 ### 1. `@ComponentScan` 注解
 
