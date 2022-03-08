@@ -308,7 +308,7 @@ $(function(){
 一般HTML代码里面使用双引号，而在JavaScript中多用单引号，比如下面代码：
 ```js
 var name = 'Wayou';
-document.getElementById('example').innerHTML = '< a href="http://opensource.cnsuning.com/">'+name+'';
+document.getElementById('example').innerHTML = '< a href="http://opensource.cnhuximi.com/">'+name+'';
 //href=".." HTML中保持双引号，JavaScript中保持单引号
 ```
 一方面，HTML代码中本来就使用的是双引号，别一方面，在JavaScript中引号中还需要引号的时候，要求我们单引号间隔着写才是合法的语句，除非你使用转意符。再者，坚持这样的统一可以保持代码风格的一致，不会出现这里字符串用双引号包着，另外的地方用单引号。
