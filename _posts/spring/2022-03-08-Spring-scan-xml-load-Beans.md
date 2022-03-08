@@ -2,7 +2,7 @@
 layout:     post
 title:      Spring解析xml并加载Beans
 subtitle:   Spring解析xml并加载Beans
-date:       2022-03-06
+date:       2022-03-08
 author:     guyang
 header-img: "img/post-bg-2018.jpg"
 tags:    
