@@ -41,7 +41,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 
  我们先看一下`AnnotationConfigApplicationContext`类的类结构 
 
-![1646817547766](1646817547766.png)
+![1646817547766](/img/spring/1646817547766.png)
 
 由于AnnotationConfigApplicationContext类的父类是GenericApplicationContext类，因此在有参构造器中调用this()时，首先执行父类GenericApplicationContext类的构造器，那么我们先看看GenericApplicationContext类的构造器。
 
@@ -139,7 +139,7 @@ public class AnnotatedBeanDefinitionReader {
 
 我们可以看到在3.2中传入的this为AnnotationConfigApplicationContext类型，而上面的方法参数类型就变为BeanDefinitionRegistry类型了。说明AnnotationConfigApplicationContext类为BeanDefinitionRegistry接口的实现类。
 
-![1646818782289](1646818782289.png)
+![1646818782289](/img/spring/1646818782289.png)
 
 #### 3.4 `AnnotationConfigUtils.registerAnnotationConfigProcessors()`方法
 
@@ -361,7 +361,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
  下面我们看看`AnnotatedBeanDefinitionReader`执行完成后，Spring容器得到了什么。它得到了下面5个Bean后置处理器。 
 
-![1646820518155](1646820518155.png)
+![1646820518155](/img/spring/1646820518155.png)
 
 我们注意到在3.4中的registerAnnotationConfigProcessors方法的中实际上注册了6个Bean，但是实际上为什么只注册了5个呢？主要是因为PersistenceAnnotationBeanPostProcessor类型的后置处理器需要导入spring-orm依赖（先检查jpaPresent，若不存在jpa，则不会注册PersistenceAnnotationBeanPostProcessor类型的后置处理器 ），而我并没有导入的原因.
 
@@ -387,9 +387,9 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 
  在Spring源码中会出现很多次BeanDefinition，那么他究竟是什么东西呢？我们现在就来揭秘一下。
 
-![1646821699567](1646821699567.png)
+![1646821699567](/img/spring/1646821699567.png)
 
-![1646894827557](1646894827557.png)
+![1646894827557](/img/spring/1646894827557.png)
 
 从上面的类图中我们可以看出，BeanDefinition是一个接口，在Spring中存在三种实现：GenericBeanDefinition、ChildBeanDefinition和RootBeenDefinition。
 
@@ -397,7 +397,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 
 Spring通过BeanDefinition将<bean>或者@Bean中的信息转换为容器的内部表示，并将这些BeanDefinition注册到BeanDefinitionRegistry中。Spring容器的BeanDefinitionRegistry(接口)就像是Spring内存数据库，主要是以Map形式存储，后续操作直接从BeanDefinitionRegistry中读取Bean信息，实际上这里的BeanDefinitionRegistry是DefaultListableBeanFactory类型，他们之间的关系如下类图所示：
 
-![1646822036584](1646822036584.png)
+![1646822036584](/img/spring/1646822036584.png)
 
 ### 6. 总结
 
