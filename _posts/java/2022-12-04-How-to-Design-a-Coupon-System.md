@@ -58,7 +58,7 @@ CREATE TABLE `t_activity` (
   PRIMARY KEY (`activeId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动信息表';
 ```
-#### 2.1.2 数据读取
+#### 2.1.2 数据展示
 在商家端可以通过status字段和cityIds字段来进行可报名活动的展示。
 
 C端读取的展示代码里可以使用设计模式中的代理模式来加一层缓存，在进行中的活动会将数据推入到cache层中。
@@ -66,7 +66,7 @@ C端读取的展示代码里可以使用设计模式中的代理模式来加一�
 #### 2.1.3 活动状态流转
 通过crontab定时任务，每分钟进行时间段的检查，来更新对应的status字段，完成活动状态的流转。
 
-#### 2.1.3 数据读取
+#### 2.1.4 数据读取
 可以使用设计模式中的代理模式来加一层缓存，非强实时的查询走cache，cache中不存在或需实时数据的再走db。
 
 ### 2.2 商家报名建券
@@ -106,7 +106,7 @@ CREATE TABLE `t_couponmeta` (
   PRIMARY KEY (`couponMetaId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='优惠券表';
 ```
-#### 2.2.2 数据读取
+#### 2.2.2 数据展示
 同样可以使用设计模式中的代理模式来加一层缓存，对于C端大量读取优惠券信息的场景，需要让读请求尽量都在cache层处理完成，降低db的压力。
 
 #### 2.2.3 状态流转
