@@ -117,9 +117,9 @@ tags:
     我们举一个发送邮件和短信的例子）
     - 首先，创建二者的共同接口：    
     ```java            
-        public interface Sender {  
-            public void Send();  
-        }  
+    public interface Sender {  
+        public void Send();  
+    }  
     ```
     - 其次，创建实现类：    
     ```java
@@ -129,19 +129,17 @@ tags:
             System.out.println("this is mailsender!");  
         }  
     }      
-    public class SmsSender implements Sender {  
-      
+    public class SmsSender implements Sender {
         @Override  
         public void Send() {  
             System.out.println("this is sms sender!");  
         }  
     }  
     ```
-
-    - 最后，建工厂类：    
+    
+- 最后，建工厂类：    
     ```java
-    public class SendFactory {  
-      
+    public class SendFactory {
         public Sender produce(String type) {  
             if ("mail".equals(type)) {  
                 return new MailSender();  
@@ -157,17 +155,16 @@ tags:
     - 我们来测试下：
     ```java
     public class FactoryTest {  
-      
         public static void main(String[] args) {  
             SendFactory factory = new SendFactory();  
             Sender sender = factory.produce("sms");  
             sender.Send();  
         }  
     } 
-	```
-	
-    输出：this is sms sender!
+    ```
     
+    输出：this is sms sender!
+	
   - 多个工厂方法模式
 	是对普通工厂方法模式的改进，在普通工厂方法模式中，如果传递的字符串出错，则不能正确创建对象，而多个工厂方法模式是提供多个工厂方法，分别创建对象。 
     
@@ -186,24 +183,22 @@ tags:
 
     测试类如下：   
     ```java
-    public class FactoryTest {  
-      
+    public class FactoryTest {
         public static void main(String[] args) {  
             SendFactory factory = new SendFactory();  
             Sender sender = factory.produceMail();  
             sender.Send();  
         }  
     } 
-	```
-    输出：this is mailsender!
+    ```
+	输出：this is mailsender!
     
   - 静态工厂方法模式，将上面的多个工厂方法模式里的方法置为静态的，不需要创建实例，直接调用即可。    
     ```java
     public class SendFactory {            
         public static Sender produceMail(){  
             return new MailSender();  
-        }  
-          
+        }      
         public static Sender produceSms(){  
             return new SmsSender();  
         }  
@@ -214,8 +209,8 @@ tags:
             sender.Send();  
         }  
     }  
-	```
-    输出：this is mailsender!
+    ```
+	输出：this is mailsender!
     
     总体来说，工厂模式适合：凡是出现了大量的产品需要创建，并且具有共同的接口时，可以通过工厂方法模式进行创建。在以上的三种模式中，第一种如果传入的字符串有误，不能正确创建对象，第三种相对于第二种，不需要实例化工厂类，所以，大多数情况下，我们会选用第三种——静态工厂方法模式。
     
@@ -225,9 +220,9 @@ tags:
 所以，从设计角度考虑，有一定的问题，如何解决？就用到抽象工厂模式，创建多个工厂类，这样一旦需要增加新的功能，直接增加新的工厂类就可以了，不需要修改之前的代码。
 请看例子：    
  ```java
-    public interface Sender {  
-        public void Send();  
-    }  
+public interface Sender {  
+    public void Send();  
+}  
  ```
 两个实现类：
 ```java
@@ -238,8 +233,7 @@ public class MailSender implements Sender {
     }  
 }  
 
-public class SmsSender implements Sender {  
-  
+public class SmsSender implements Sender {
     @Override  
     public void Send() {  
         System.out.println("this is sms sender!");  
@@ -248,16 +242,14 @@ public class SmsSender implements Sender {
 ```
 两个工厂类：
 ```java
-public class SendMailFactory implements Provider {  
-      
+public class SendMailFactory implements Provider {
     @Override  
     public Sender produce(){  
         return new MailSender();  
     }  
 }  
 
-public class SendSmsFactory implements Provider{  
-  
+public class SendSmsFactory implements Provider{
     @Override  
     public Sender produce() {  
         return new SmsSender();  
@@ -273,8 +265,7 @@ public interface Provider {
 
 测试类：
 ```java
-public class Test {  
-  
+public class Test {
     public static void main(String[] args) {  
         Provider provider = new SendMailFactory();  
         Sender sender = provider.produce();  
@@ -296,8 +287,7 @@ public class Test {
 
 首先我们写一个简单的单例类：
 ```java
-public class Singleton {  
-  
+public class Singleton {
     /* 持有私有静态实例，防止被引用，此处赋值为null，目的是实现延迟加载 */  
     private static Singleton instance = null;  
   
@@ -371,8 +361,7 @@ public static Singleton getInstance(){
 这样我们就不用担心上面的问题。同时该方法也只会在第一次调用的时候使用互斥机制，这样就解决了低性能问题。
 这样我们暂时总结一个完美的单例模式：
 ```java
-public class Singleton {  
-  
+public class Singleton {
     /* 私有构造方法，防止被实例化 */  
     private Singleton() {  
     }  
@@ -397,8 +386,7 @@ public class Singleton {
 我们只能根据实际情况，选择最适合自己应用场景的实现方法。也有人这样实现：因为我们只需要在创建类的时候进行同步，
 所以只要将创建和getInstance()分开，单独为创建加synchronized关键字，也是可以的：
 ```java
-public class SingletonTest {  
-  
+public class SingletonTest {
     private static SingletonTest instance = null;  
   
     private SingletonTest() {  
@@ -422,8 +410,7 @@ public class SingletonTest {
 
 补充：采用"影子实例"的办法为单例对象的属性同步更新
 ```java
-public class SingletonTest {  
-  
+public class SingletonTest {
     private static SingletonTest instance = null;  
     private Vector properties = null;  
   
@@ -478,8 +465,7 @@ public class SingletonTest {
 
 还和前面一样，一个Sender接口，两个实现类MailSender和SmsSender。最后，建造者类如下：
 ```java
-public class Builder {  
-      
+public class Builder {
     private List<Sender> list = new ArrayList<Sender>();  
       
     public void produceMailSender(int count){  
@@ -497,8 +483,7 @@ public class Builder {
 ```
 测试类：
 ```java
-public class Test {  
-  
+public class Test {
     public static void main(String[] args) {  
         Builder builder = new Builder();  
         builder.produceMailSender(10);  
@@ -513,8 +498,7 @@ public class Test {
 原型模式虽然是创建型的模式，但是与工程模式没有关系，从名字即可看出，该模式的思想就是将一个对象作为原型，对其进行复制、克隆，产生一个和原对象类似的新对象。
 本小结会通过对象的复制，进行讲解。在Java中，复制对象是通过clone()实现的，先创建一个原型类：
 ```java
-public class Prototype implements Cloneable {  
-  
+public class Prototype implements Cloneable {
     public Object clone() throws CloneNotSupportedException {  
         Prototype proto = (Prototype) super.clone();  
         return proto;  
@@ -532,8 +516,7 @@ public class Prototype implements Cloneable {
 
 此处，写一个深浅复制的例子：
 ```java
-public class Prototype implements Cloneable, Serializable {  
-  
+public class Prototype implements Cloneable, Serializable {
     private static final long serialVersionUID = 1L;  
     private String string;  
   
@@ -588,15 +571,13 @@ class SerializableObject implements Serializable {
 将某个类的接口转换成客户端期望的另一个接口表示，目的是消除由于接口不匹配所造成的类的兼容性问题。主要分为三类：类的适配器模式、对象的适配器模式、接口的适配器模式。首先，我们来看看类的适配器模式：
 核心思想就是：有一个Source类，拥有一个方法，待适配，目标接口时Targetable，通过Adapter类，将Source的功能扩展到Targetable里，看代码：
 ```java
-public class Source {  
-  
+public class Source {
     public void method1() {  
         System.out.println("this is original method!");  
     }  
 }  
 
-public interface Targetable {  
-  
+public interface Targetable {
     /* 与原类中的方法相同 */  
     public void method1();  
   
@@ -604,8 +585,7 @@ public interface Targetable {
     public void method2();  
 }  
 
-public class Adapter extends Source implements Targetable {  
-  
+public class Adapter extends Source implements Targetable {
     @Override  
     public void method2() {  
         System.out.println("this is the targetable method!");  
@@ -614,8 +594,7 @@ public class Adapter extends Source implements Targetable {
 ```
 Adapter类继承Source类，实现Targetable接口，下面是测试类：
 ```java
-public class AdapterTest {  
-  
+public class AdapterTest {
     public static void main(String[] args) {  
         Targetable target = new Adapter();  
         target.method1();  
@@ -634,8 +613,8 @@ this is the targetable method!
 
 只需要修改Adapter类的源码即可：
 ```java
-public class Wrapper implements Targetable {  
-  
+public class Wrapper implements Targetable {
+    
     private Source source;  
       
     public Wrapper(Source source){  
@@ -655,8 +634,7 @@ public class Wrapper implements Targetable {
 ```
 测试类：
 ```java
-public class AdapterTest {  
-  
+public class AdapterTest {
     public static void main(String[] args) {  
         Source source = new Source();  
         Targetable target = new Wrapper(source);  
@@ -673,16 +651,14 @@ public class AdapterTest {
 这个很好理解，在实际开发中，我们也常会遇到这种接口中定义了太多的方法，以致于有时我们在一些实现类中并不是都需要。
 看代码：
 ```java
-public interface Sourceable {  
-      
+public interface Sourceable {
     public void method1();  
     public void method2();  
 } 
 ```
 抽象类Wrapper2：
 ```java
-public abstract class Wrapper2 implements Sourceable{  
-      
+public abstract class Wrapper2 implements Sourceable{
     public void method1(){}  
     public void method2(){}  
 }  
@@ -699,8 +675,7 @@ public class SourceSub2 extends Wrapper2 {
     }  
 }  
 
-public class WrapperTest {  
-  
+public class WrapperTest {
     public static void main(String[] args) {  
         Sourceable source1 = new SourceSub1();  
         Sourceable source2 = new SourceSub2();  
@@ -737,16 +712,14 @@ Source类是被装饰类，Decorator类是一个装饰类，可以为Source类�
         public void method();  
     }  
     
-    public class Source implements Sourceable {  
-      
+    public class Source implements Sourceable {
         @Override  
         public void method() {  
             System.out.println("the original method!");  
         }  
     }  
     
-    public class Decorator implements Sourceable {  
-      
+    public class Decorator implements Sourceable {
         private Sourceable source;  
           
         public Decorator(Sourceable source){  
@@ -763,8 +736,7 @@ Source类是被装饰类，Decorator类是一个装饰类，可以为Source类�
 ```
 测试类：
 ```java
-public class DecoratorTest {  
-  
+public class DecoratorTest {
     public static void main(String[] args) {  
         Sourceable source = new Source();  
         Sourceable obj = new Decorator(source);  
@@ -798,16 +770,14 @@ public interface Sourceable {
     public void method();  
 }  
 
-public class Source implements Sourceable {  
-  
+public class Source implements Sourceable {
     @Override  
     public void method() {  
         System.out.println("the original method!");  
     }  
 }  
 
-public class Proxy implements Sourceable {  
-  
+public class Proxy implements Sourceable {
     private Source source;  
     public Proxy(){  
         super();  
@@ -829,13 +799,11 @@ public class Proxy implements Sourceable {
 ```
 测试类：
 ```java
-public class ProxyTest {  
-  
+public class ProxyTest {
     public static void main(String[] args) {  
         Sourceable source = new Proxy();  
         source.method();  
-    }  
-  
+    }    
 }
 ```
 输出：
@@ -861,8 +829,7 @@ after proxy!
 
 我们先看下实现类：
 ```java
-public class CPU {  
-      
+public class CPU {
     public void startup(){  
         System.out.println("cpu startup!");  
     }  
@@ -872,8 +839,7 @@ public class CPU {
     }  
 }  
 
-public class Memory {  
-      
+public class Memory {
     public void startup(){  
         System.out.println("memory startup!");  
     }  
@@ -883,8 +849,7 @@ public class Memory {
     }  
 }  
 
-public class Disk {  
-      
+public class Disk { 
     public void startup(){  
         System.out.println("disk startup!");  
     }  
@@ -924,8 +889,7 @@ public class Computer {
 ```
 User类如下：
 ```java
-public class User {  
-  
+public class User { 
     public static void main(String[] args) {  
         Computer computer = new Computer();  
         computer.startup();  
@@ -966,16 +930,14 @@ public interface Sourceable {
 ```
 分别定义两个实现类：
 ```java
-public class SourceSub1 implements Sourceable {  
-  
+public class SourceSub1 implements Sourceable {
     @Override  
     public void method() {  
         System.out.println("this is the first sub!");  
     }  
 }  
 
-public class SourceSub2 implements Sourceable {  
-  
+public class SourceSub2 implements Sourceable {
     @Override  
     public void method() {  
         System.out.println("this is the second sub!");  
@@ -1040,8 +1002,7 @@ this is the second sub!
 
 直接来看代码：
 ```java
-public class TreeNode {  
-      
+public class TreeNode { 
     private String name;  
     private TreeNode parent;  
     private Vector<TreeNode> children = new Vector<TreeNode>();  
@@ -1082,8 +1043,7 @@ public class TreeNode {
     }  
 }  
 
-public class Tree {  
-  
+public class Tree { 
     TreeNode root = null;  
   
     public Tree(String name) {  
@@ -1112,8 +1072,7 @@ FlyWeightFactory负责创建和管理享元单元，当一个客户端请求时�
 
 看下数据库连接池的代码：
 ```java
-public class ConnectionPool {  
-      
+public class ConnectionPool {
     private Vector<Connection> pool;  
       
     /*公有属性*/  
