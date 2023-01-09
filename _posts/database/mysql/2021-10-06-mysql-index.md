@@ -1,3 +1,14 @@
+---
+layout: post
+title: "MySQL索引"
+subtitle: 'MySQL索引'
+author: "JavaGuide"
+header-img: "img/post-bg-2018.jpg"
+tags:    
+    - linux
+    - mysql
+---
+
 ## 何为索引？有什么作用？
 
 **索引是一种用于快速查询和检索数据的数据结构。常见的索引结构有: B 树， B+树和 Hash。**

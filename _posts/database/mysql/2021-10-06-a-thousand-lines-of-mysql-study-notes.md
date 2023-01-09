@@ -1,3 +1,14 @@
+---
+layout: post
+title: "mysql入门"
+subtitle: 'mysql入门'
+author: "JavaGuide"
+header-img: "img/post-bg-2018.jpg"
+tags:    
+    - linux
+    - mysql
+---
+
 > 原文地址：https://shockerli.net/post/1000-line-mysql-note/ ，JavaGuide 对本文进行了简答排版，新增了目录。
 > 作者：格物
 

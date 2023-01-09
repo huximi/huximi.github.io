@@ -1,3 +1,14 @@
+---
+layout: post
+title: "MySQL命令规范"
+subtitle: '数据库命令规范'
+author: "JavaGuide"
+header-img: "img/post-bg-2018.jpg"
+tags:    
+    - linux
+    - mysql
+---
+
 > 作者: 听风，原文地址: <https://www.cnblogs.com/huchong/p/10219318.html>。JavaGuide 已获得作者授权。
 
 <!-- TOC -->

@@ -1,3 +1,14 @@
+---
+layout: post
+title: "MySQL锁"
+subtitle: '一致性非锁定读和锁定读'
+author: "JavaGuide"
+header-img: "img/post-bg-2018.jpg"
+tags:    
+    - linux
+    - mysql
+---
+
 <!-- TOC -->
 
 - [一致性非锁定读和锁定读](#一致性非锁定读和锁定读)

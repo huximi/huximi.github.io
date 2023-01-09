@@ -1,3 +1,14 @@
+---
+layout: post
+title: "MySQL 日志"
+subtitle: 'MySQL 日志'
+author: "JavaGuide"
+header-img: "img/post-bg-2018.jpg"
+tags:    
+    - linux
+    - mysql
+---
+
 > 本文来自公号程序猿阿星投稿，JavaGuide 对其做了补充完善。
 
 ## 前言

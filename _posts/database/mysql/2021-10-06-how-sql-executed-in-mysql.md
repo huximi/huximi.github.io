@@ -1,3 +1,14 @@
+---
+layout: post
+title: "MySQL 基础架构分析"
+subtitle: 'MySQL 基础架构分析'
+author: "JavaGuide"
+header-img: "img/post-bg-2018.jpg"
+tags:    
+    - linux
+    - mysql
+---
+
 本文来自[木木匠](https://github.com/kinglaw1204)投稿。
 
 <!-- TOC -->

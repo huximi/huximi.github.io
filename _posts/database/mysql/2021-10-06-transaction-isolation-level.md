@@ -1,3 +1,14 @@
+---
+layout: post
+title: "MySQL 事务隔离"
+subtitle: '事务隔离级别'
+author: "JavaGuide"
+header-img: "img/post-bg-2018.jpg"
+tags:    
+    - linux
+    - mysql
+---
+
 > 本文由 [SnailClimb](https://github.com/Snailclimb) 和 [guang19](https://github.com/guang19) 共同完成。
 <!-- TOC -->
 
