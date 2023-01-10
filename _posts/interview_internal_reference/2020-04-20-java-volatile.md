@@ -7,6 +7,7 @@ header-img: "img/post-bg-2018.jpg"
 tags:
   - volatile
   - Java
+  - 面试题
 ---
 
 如果一个字段被声明成volatile，Java内存模型保证所有线程看到这个变量的值是一致的。
