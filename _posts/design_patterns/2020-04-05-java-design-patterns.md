@@ -440,6 +440,30 @@ public class SingletonTest {
     }  
 }  
 ```
+Spring 中单例的实现：
+```java
+public class Singleton {
+    private static volatile Singleton instance;
+    private Singleton(){}
+    
+    public static Singleton getInstance(){
+        // 使用本地变量，减少volatile类型字段的访问和操作
+        Singleton temp = instance;
+        if(temp == null){
+            synchronized(Singleton.class){
+                temp = instance;
+                if(temp == null){
+                    temp = new Singleton();
+                    instance = temp;
+                }
+            }
+        }
+        return temp;
+    }  
+}
+```
+
+
 通过单例模式的学习告诉我们：
 
 1、单例模式理解起来简单，但是具体实现起来还是有一定的难度。
