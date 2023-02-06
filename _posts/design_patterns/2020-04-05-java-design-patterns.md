@@ -368,7 +368,7 @@ public class Singleton {
   
     /* 此处使用一个内部类来维护单例 */  
     private static class SingletonFactory {  
-        private static Singleton instance = new Singleton();  
+        private static final Singleton instance = new Singleton();  
     }  
   
     /* 获取实例 */  
