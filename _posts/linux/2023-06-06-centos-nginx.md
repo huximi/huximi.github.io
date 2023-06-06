@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Centos7中以yum方式安装nginx
-subtitle:   Centos7中以yum方式安装nginx
+subtitle:   nginx的安装与配置，包括反代
 date:       2023-06-06
 author:     guyang
 header-img: "img/post-bg-2018.jpg"
