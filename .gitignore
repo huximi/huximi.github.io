@@ -8,6 +8,7 @@ node_modules
 *.log
 *.lock
 *.sh
+*.iml
 .DS_Store
 .jekyll-cache
 */.DS_Store
